@@ -3,7 +3,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { createMockJWT, parseMockJWT, MockJWTPayload } from "@/utils/jwt";
+import { createMockJWT, parseMockJWT } from "@/utils/jwt";
 
 type Role = "admin" | "editor" | null;
 
