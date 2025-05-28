@@ -39,12 +39,6 @@ export default function Home() {
           <Button onClick={() => router.push("/dashboard")}>
             Go to Dashboard <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
-          <Button variant="outline" onClick={() => router.push("/users")}>
-            Manage Users
-          </Button>
-          <Button variant="ghost" onClick={() => router.push("/settings")}>
-            Settings
-          </Button>
         </motion.div>
       </div>
     </>
