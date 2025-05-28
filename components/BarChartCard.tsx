@@ -1,35 +1,62 @@
 "use client";
 
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
+import { useEffect, useState } from "react";
 
-const data = [
-  { name: "Article 1", views: 100 },
-  { name: "Article 2", views: 300 },
-  { name: "Article 3", views: 250 },
-  { name: "Article 4", views: 400 },
-];
+type Entry = {
+  id: number;
+  label: string;
+  value: number;
+};
 
 export default function BarChartCard() {
+  const [data, setData] = useState<Entry[]>([]);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("dashboardEntries");
+    if (stored) {
+      setData(JSON.parse(stored));
+    }
+  }, []);
+
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 w-full max-w-2xl">
-      <h2 className="text-xl font-semibold mb-2">Content Performance</h2>
-      <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Bar dataKey="views" fill="#10b981" />
-        </BarChart>
-      </ResponsiveContainer>
+    <div className="space-y-6">
+      <h2 className="text-2xl font-semibold">Analytics Overview</h2>
+
+      {/* Table (view only) */}
+      <div className="overflow-x-auto border rounded shadow">
+        <table className="min-w-full text-left">
+          <thead className="bg-gray-200">
+            <tr>
+              <th className="px-4 py-2">Label</th>
+              <th className="px-4 py-2">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((entry) => (
+              <tr key={entry.id} className="border-t">
+                <td className="px-4 py-2">{entry.label}</td>
+                <td className="px-4 py-2">{entry.value}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Simple chart display */}
+      <div className="bg-white p-4 border rounded shadow">
+        <p className="font-medium mb-2">Bar Chart Preview</p>
+        <div className="grid grid-cols-6 gap-2 items-end h-40">
+          {data.map((entry) => (
+            <div key={entry.id} className="text-center">
+              <div
+                className="bg-blue-600 w-full rounded-t"
+                style={{ height: `${entry.value}px` }}
+              ></div>
+              <span className="text-sm">{entry.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,8 +1,8 @@
 "use client";
 
 import {
-  LineChart,
-  Line,
+  BarChart,
+  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -10,32 +10,22 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const data = [
-  { name: "Jan", value: 400 },
-  { name: "Feb", value: 300 },
-  { name: "Mar", value: 500 },
-  { name: "Apr", value: 200 },
-  { name: "May", value: 350 },
-  { name: "Jun", value: 420 },
-];
+type Props = {
+  data: { label: string; value: number }[];
+};
 
-export default function ChartCard() {
+export default function ChartCard({ data }: Props) {
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 w-full max-w-2xl">
-      <h2 className="text-xl font-semibold mb-2">Monthly Performance</h2>
+    <div className="bg-white p-6 rounded shadow-md">
+      <h2 className="text-xl font-semibold mb-4">Chart Visualization</h2>
       <ResponsiveContainer width="100%" height={300}>
-        <LineChart data={data}>
+        <BarChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
+          <XAxis dataKey="label" />
           <YAxis />
           <Tooltip />
-          <Line
-            type="monotone"
-            dataKey="value"
-            stroke="#2563eb"
-            strokeWidth={2}
-          />
-        </LineChart>
+          <Bar dataKey="value" fill="#8b5cf6" />
+        </BarChart>
       </ResponsiveContainer>
     </div>
   );

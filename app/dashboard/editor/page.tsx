@@ -1,3 +1,5 @@
+"use client";
+
 import { withAuth } from "@/utils/withAuth";
 import BarChartCard from "@/components/BarChartCard";
 import Navbar from "@/components/Navbar";

@@ -2,37 +2,44 @@
 
 import { useAuth } from "@/auth.tsx/auth";
 import { useRouter } from "next/navigation";
+import Navbar from "@/components/Navbar";
+import { ArrowRight, LogIn } from "lucide-react";
 
 export default function DashboardLanding() {
   const { role } = useAuth();
   const router = useRouter();
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 text-center p-8">
-      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow max-w-md space-y-4">
-        <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
-          Welcome to the Dashboard
-        </h1>
-        {role ? (
-          <>
-            <p className="text-gray-700 dark:text-gray-300">
-              You are logged in as <strong>{role}</strong>.
-            </p>
+    <div className="min-h-screen bg-gradient-to-br from-purple-700 to-indigo-800 text-white">
+      <Navbar />
+      <div className="flex items-center justify-center pt-20 px-4">
+        <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-xl p-8 shadow-2xl w-full max-w-lg text-center space-y-6">
+          <h1 className="text-3xl font-bold tracking-wide">
+            Welcome to the Dashboard
+          </h1>
+
+          {role ? (
+            <>
+              <p className="text-lg text-white/80">
+                You are logged in as{" "}
+                <strong className="capitalize">{role}</strong>.
+              </p>
+              <button
+                onClick={() => router.push(`/dashboard/${role}`)}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 transition rounded-full text-white shadow-md"
+              >
+                Go to {role} Dashboard <ArrowRight size={18} />
+              </button>
+            </>
+          ) : (
             <button
-              onClick={() => router.push(`/dashboard/${role}`)}
-              className="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded"
+              onClick={() => router.push("/login")}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 transition rounded-full text-white shadow-md"
             >
-              Go to {role} Dashboard
+              Go to Login <LogIn size={18} />
             </button>
-          </>
-        ) : (
-          <button
-            onClick={() => router.push("/login")}
-            className="mt-4 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded"
-          >
-            Go to Login
-          </button>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

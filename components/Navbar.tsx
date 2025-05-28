@@ -2,6 +2,7 @@
 
 import { useAuth } from "@/auth.tsx/auth";
 import { useRouter } from "next/navigation";
+import { LogOut, User } from "lucide-react";
 
 export default function Navbar() {
   const { role, logout } = useAuth();
@@ -12,27 +13,28 @@ export default function Navbar() {
     router.push("/login");
   };
 
-  const dashboardPath =
-    role === "admin" ? "/dashboard/admin" : "/dashboard/editor";
-
   return (
-    <nav className="bg-blue-600 text-white px-6 py-4 flex justify-between items-center shadow-md">
+    <nav className="bg-gradient-to-r from-purple-700 to-indigo-800 text-white px-6 py-4 flex justify-between items-center shadow-lg">
       <div
-        className="text-xl font-semibold cursor-pointer"
-        onClick={() => router.push(dashboardPath)}
+        onClick={() => router.push("/login")}
+        className="text-2xl font-bold tracking-wide cursor-pointer hover:opacity-90 transition"
       >
-        Mini Admin Dashboard
+        DigiSigns Admin
       </div>
+
       <div className="flex items-center gap-4">
         {role && (
-          <span className="bg-blue-800 px-3 py-1 rounded text-sm">
-            Role: <strong>{role}</strong>
-          </span>
+          <div className="flex items-center gap-2 bg-purple-900/50 px-3 py-1 rounded-full text-sm shadow-sm">
+            <User size={16} />
+            <span className="capitalize">{role}</span>
+          </div>
         )}
+
         <button
           onClick={handleLogout}
-          className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded text-sm"
+          className="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-sm px-4 py-2 rounded-full transition shadow-md"
         >
+          <LogOut size={16} />
           Logout
         </button>
       </div>
