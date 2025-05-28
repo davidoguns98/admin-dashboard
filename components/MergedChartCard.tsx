@@ -8,6 +8,12 @@ type Entry = {
   value: number;
 };
 
+interface Post {
+  id: number;
+  title: string;
+  body: string;
+}
+
 export default function MergedChartCard() {
   const [data, setData] = useState<Entry[]>([]);
   const [loading, setLoading] = useState(true);
@@ -20,7 +26,7 @@ export default function MergedChartCard() {
       );
       const posts = await res.json();
 
-      const transformedAPIData: Entry[] = posts.map((post: any) => ({
+      const transformedAPIData: Entry[] = posts.map((post: Post) => ({
         id: post.id,
         label: post.title.slice(0, 15) + "...", // shorten for chart label
         value: post.body.length, // simulate a "value" based on content length
