@@ -1,6 +1,6 @@
 "use client";
 
-import { useAuth } from "@/auth.tsx/auth";
+import { useAuth } from "@/context/auth.tsx/auth";
 import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import { ArrowRight, LogIn } from "lucide-react";

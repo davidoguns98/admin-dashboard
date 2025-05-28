@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { withAuth } from "@/utils/withAuth";
 import Navbar from "@/components/Navbar";
 import ChartCard from "@/components/ChartCard";
+import PostsTable from "@/components/PostTables";
+import MergedChartCard from "@/components/MergedChartCard";
 
 type Entry = {
   id: number;
@@ -70,9 +72,11 @@ function AdminDashboardPage() {
       <Navbar />
       <div className="p-8 space-y-8 max-w-3xl mx-auto">
         <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+        <PostsTable />
+        <MergedChartCard />
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 mt-10">
           <input
             type="text"
             value={label}
